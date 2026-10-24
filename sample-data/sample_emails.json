@@ -1,0 +1,37 @@
+[
+  {
+    "id": "email-001",
+    "from": "careers@acmecloud.com",
+    "subject": "Thank you for applying to Acme Cloud - Software Engineer",
+    "received_at": "2026-10-10T09:12:00Z",
+    "body": "Hi Rudra,\n\nThank you for applying to the Software Engineer position at Acme Cloud. We have received your application and our team is reviewing it. We will be in touch regarding next steps.\n\nBest,\nAcme Cloud Talent Team"
+  },
+  {
+    "id": "email-002",
+    "from": "no-reply@brightwave.io",
+    "subject": "Interview Invitation: Frontend Developer at Brightwave",
+    "received_at": "2026-10-12T14:30:00Z",
+    "body": "Hello,\n\nWe were impressed with your application for the Frontend Developer role. We would like to invite you to a technical interview next week. Please reply with your availability.\n\nRegards,\nBrightwave Hiring"
+  },
+  {
+    "id": "email-003",
+    "from": "hr-dept@g00gle-careers-secure.xyz",
+    "subject": "URGENT: You are hired! Pay onboarding fee to start",
+    "received_at": "2026-10-14T03:04:00Z",
+    "body": "Congratulations!!! You have been SELECTED for a remote position with a salary of $8000/week. No interview required. To secure your spot, please pay a small onboarding fee of $250 via gift cards and send your bank account and SSN immediately. Act now, this offer expires in 2 hours!"
+  },
+  {
+    "id": "email-004",
+    "from": "recruiting@novadata.com",
+    "subject": "Application update - Data Analyst role",
+    "received_at": "2026-10-15T11:00:00Z",
+    "body": "Dear Applicant,\n\nThank you for your interest in the Data Analyst position at NovaData. After careful review, we have decided to move forward with other candidates at this time. We wish you the best in your search.\n\nSincerely,\nNovaData Recruiting"
+  },
+  {
+    "id": "email-005",
+    "from": "talent@finchpay.com",
+    "subject": "We received your application - Backend Engineer",
+    "received_at": "2026-10-16T16:45:00Z",
+    "body": "Hi,\n\nThis is a confirmation that your application for the Backend Engineer role at FinchPay has been received. Our recruiters typically respond within two weeks.\n\nThanks,\nFinchPay Talent"
+  }
+]

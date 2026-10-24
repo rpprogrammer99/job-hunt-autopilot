@@ -1,0 +1,75 @@
+rules_version = '2';
+
+// Job Hunt Autopilot — Firestore Security Rules.
+//
+// Principles:
+//   * Deny by default. Only the rules below grant access.
+//   * Every user-owned record must carry `ownerUid` matching the signed-in
+//     user, OR live under a user-specific path (/users/{uid}/...).
+//   * The frontend can NEVER read or write another user's data.
+//   * These are safe defaults for development. Review before production and
+//     tighten field-level validation as the schema stabilizes.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- Helpers ----
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+    // On create/update, the incoming doc must be owned by the caller.
+    function ownsIncoming() {
+      return isSignedIn() && request.resource.data.ownerUid == request.auth.uid;
+    }
+    // On read/delete, the stored doc must be owned by the caller.
+    function ownsExisting() {
+      return isSignedIn() && resource.data.ownerUid == request.auth.uid;
+    }
+
+    // ---- User profile: /users/{uid} ----
+    // A user may read/write only their own profile document.
+    match /users/{uid} {
+      allow read, write: if isOwner(uid);
+
+      // Optional per-user subcollections (user-specific path scoping).
+      match /{subcollection}/{docId} {
+        allow read, write: if isOwner(uid);
+      }
+    }
+
+    // ---- Top-level owner-scoped collections ----
+    // Each document must carry an `ownerUid` field equal to the caller's uid.
+    match /applications/{docId} {
+      allow read, delete: if ownsExisting();
+      allow create: if ownsIncoming();
+      // Prevent changing the owner on update.
+      allow update: if ownsExisting() && ownsIncoming();
+    }
+
+    match /emailMessages/{docId} {
+      allow read, delete: if ownsExisting();
+      allow create: if ownsIncoming();
+      allow update: if ownsExisting() && ownsIncoming();
+    }
+
+    match /reminders/{docId} {
+      allow read, delete: if ownsExisting();
+      allow create: if ownsIncoming();
+      allow update: if ownsExisting() && ownsIncoming();
+    }
+
+    match /feedback/{docId} {
+      // Feedback is append-only from the client: create + read own, no update.
+      allow read: if ownsExisting();
+      allow create: if ownsIncoming();
+      allow update, delete: if false;
+    }
+
+    // ---- Deny everything else ----
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

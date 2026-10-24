@@ -1,0 +1,48 @@
+# ---- Secrets & credentials (NEVER commit) ----
+.env
+.env.*
+!.env.example
+*-service-account.json
+service-account*.json
+serviceAccount*.json
+*.pem
+*.key
+credentials.json
+gcp-key.json
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+.coverage
+htmlcov/
+
+# ---- Node / Frontend ----
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/
+
+# ---- Firebase ----
+.firebase/
+firebase-debug.log
+firestore-debug.log
+.firebaserc.local
+
+# ---- Editor / OS ----
+.DS_Store
+.idea/
+.vscode/
+*.swp
+Thumbs.db
+
+# ---- Local runtime data ----
+backend/.local_store.json
